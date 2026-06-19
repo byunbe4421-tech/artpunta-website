@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CONTACT | ART PUNTA</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" />
+  <style>
+    @font-face {
+      font-family: "WAGURI";
+      src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2311-1@1.1/WAGURITTF.woff2") format("woff2");
+      font-weight: normal; font-style: normal; font-display: swap;
+    }
+    :root {
+      --canvas: #faf8f5; --card: #f2ede5; --elevated: #ece6dc; --soft: #f8f5f0;
+      --ink: #1c1a18; --body-c: #4a4540; --body-strong: #2c2820; --muted: #8a8278;
+      --hair: #d2a378; --flame: #d43820; --flame-light: #e55030;
+      --ocean: #0fa8c8; --ocean-light: #30bcd8; --gold: #f0b018;
+      --dark: #0d2040; --on-dark: #f5f0e8; --on-muted: #a8a098;
+      --r: 6px; --ease: cubic-bezier(0.23,1,0.32,1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--canvas); color: var(--ink); font-family: "Naver NanumSquare Neo", "NanumSquare Neo", "Pretendard", "Malgun Gothic", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    .ctn { width: min(1160px, calc(100% - 40px)); margin-inline: auto; }
+
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 900; height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: rgba(250,248,245,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--hair); }
+    .nav-brand { font-size: 17px; font-weight: 800; letter-spacing: 1.5px; font-family: "Pretendard", system-ui, sans-serif; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .nav-brand img { height: 34px; width: auto; display: block; }
+    .nav-menu { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-menu a { font-size: 14px; font-weight: 600; font-family: "Pretendard", system-ui, sans-serif; color: var(--body-c); text-decoration: none; white-space: nowrap; transition: color 140ms; }
+    .nav-menu a:hover, .nav-menu a[aria-current] { color: var(--ink); }
+    .nav-cta { background: var(--flame); color: var(--on-dark) !important; padding: 9px 18px; border-radius: var(--r); font-weight: 700 !important; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; color: var(--ink); font-size: 22px; padding: 4px; }
+
+    .hero { min-height: 52vh; background: var(--dark); display: flex; align-items: center; padding-top: 60px; }
+    .hero-inner { padding: 72px 0; }
+    .hero-label { font-size: 13px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; font-family: "Pretendard", system-ui, sans-serif; }
+    .hero-hl { font-size: clamp(36px, 6vw, 72px); font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; font-family: "Pretendard", system-ui, sans-serif; color: var(--on-dark); margin-bottom: 20px; }
+    .hero-sub { font-size: clamp(16px, 1.8vw, 20px); color: rgba(245,240,232,0.75); line-height: 1.7; }
+
+    .sec { padding: 88px 0; }
+    .sec-card { background: var(--card); }
+    .eyebrow { font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--flame); margin-bottom: 14px; font-family: "Pretendard", system-ui, sans-serif; }
+    .h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 800; line-height: 1.15; letter-spacing: -0.5px; font-family: "Pretendard", system-ui, sans-serif; color: var(--ink); margin-bottom: 18px; }
+
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 48px; align-items: start; }
+    .contact-methods { display: flex; flex-direction: column; gap: 16px; }
+    .contact-card { background: var(--canvas); border: 1px solid var(--hair); border-radius: var(--r); padding: 32px; display: flex; flex-direction: column; gap: 12px; }
+    .contact-card-label { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--flame); }
+    .contact-card-title { font-size: 20px; font-weight: 800; color: var(--ink); font-family: "Pretendard", system-ui, sans-serif; }
+    .contact-card-desc { font-size: 15px; line-height: 1.7; color: var(--body-c); }
+    .contact-card-action { margin-top: 8px; }
+
+    .notice-box { background: var(--elevated); border-radius: var(--r); padding: 28px 32px; margin-top: 16px; }
+    .notice-box p { font-size: 15px; line-height: 1.7; color: var(--body-c); }
+    .notice-box p + p { margin-top: 8px; }
+    .notice-box strong { color: var(--ink); font-weight: 700; }
+
+    .info-card { background: var(--dark); border-radius: var(--r); padding: 40px; }
+    .info-card-title { font-size: 22px; font-weight: 800; color: var(--on-dark); margin-bottom: 24px; font-family: "Pretendard", system-ui, sans-serif; }
+    .info-list { display: flex; flex-direction: column; gap: 16px; }
+    .info-row { display: flex; gap: 12px; }
+    .info-key { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); min-width: 64px; padding-top: 2px; }
+    .info-val { font-size: 15px; line-height: 1.6; color: rgba(245,240,232,0.8); }
+
+    .btn { display: inline-flex; align-items: center; gap: 6px; height: 48px; padding: 0 24px; border-radius: var(--r); font-size: 15px; font-weight: 700; font-family: "Pretendard", system-ui, sans-serif; text-decoration: none; transition: transform 180ms var(--ease); }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-flame { background: var(--flame); color: var(--on-dark); }
+    .btn-flame:hover { background: var(--flame-light); }
+    .btn-ocean { background: var(--ocean); color: var(--on-dark); }
+
+    .footer { background: var(--dark); padding: 56px 0 0; }
+    .footer-grid { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 36px; padding-bottom: 40px; border-bottom: 1px solid var(--hair); }
+    .footer-brand { font-size: 20px; font-weight: 800; color: var(--on-dark); letter-spacing: 1px; margin-bottom: 6px; }
+    .footer-tagline { font-size: 13px; color: var(--on-muted); }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+    .footer-links a { font-size: 14px; color: var(--on-muted); text-decoration: none; transition: color 140ms; }
+    .footer-links a:hover { color: var(--on-dark); }
+    .footer-copy { padding: 20px 0; font-size: 12px; color: var(--on-muted); text-align: center; }
+
+    @media (max-width: 900px) {
+      .nav { padding: 0 20px; }
+      .nav-menu { display: none; flex-direction: column; position: fixed; top: 60px; left: 0; right: 0; background: rgba(250,248,245,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--hair); padding: 12px 0; z-index: 899; }
+      .nav-menu.open { display: flex; }
+      .nav-menu li { width: 100%; }
+      .nav-menu a { display: block; padding: 13px 20px; font-size: 15px; }
+      .nav-cta { margin: 8px 20px 4px; }
+      .nav-toggle { display: flex; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-grid { flex-direction: column; gap: 24px; }
+    }
+    @media (max-width: 640px) {
+      .sec { padding: 64px 0; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="nav" id="siteNav">
+  <a class="nav-brand" href="index.html"><img src="logo.webp" alt="ART PUNTA 로고">ART PUNTA</a>
+  <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false">☰</button>
+  <ul class="nav-menu" id="navMenu" role="list">
+    <li><a href="index.html">아트푼타 소개</a></li>
+    <li><a href="mptora52-education.html">아트푼타 교육</a></li>
+    <li><a href="mptora53-construction.html">아트푼타 시공</a></li>
+    <li><a href="mptqutum-story.html">아트푼타 이야기</a></li>
+    <li><a href="contact.html" aria-current="page" class="nav-cta">CONTACT</a></li>
+  </ul>
+</header>
+
+<section class="hero">
+  <div class="ctn hero-inner">
+    <p class="hero-label">CONTACT</p>
+    <h1 class="hero-hl">문의 및<br>수강신청</h1>
+    <p class="hero-sub">시공 견적부터 교육 신청까지<br>아트푼타가 직접 확인합니다</p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="ctn">
+    <p class="eyebrow">문의 방법</p>
+    <h2 class="h2">아래 방법으로<br>연락주세요</h2>
+    <div class="contact-grid">
+      <div class="contact-methods">
+        <div class="contact-card">
+          <p class="contact-card-label">시공 견적문의</p>
+          <h3 class="contact-card-title">네이버 플레이스 톡톡</h3>
+          <p class="contact-card-desc">현장 작업 중에는 전화를 받지 못하는 경우가 많습니다. 네이버 플레이스 톡톡으로 문의 주시면 최대한 빠르게 연락드립니다.</p>
+          <div class="contact-card-action">
+            <a href="https://talk.naver.com/w5x1nv?frm=pblog&ref=https%3A%2F%2Fblog.naver.com%2Fwook5461%2F223384512385#nafullscreen" target="_blank" rel="noreferrer" class="btn btn-flame">톡톡으로 문의하기 →</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <p class="contact-card-label">교육 수강신청</p>
+          <h3 class="contact-card-title">네이버 폼 신청</h3>
+          <p class="contact-card-desc">유럽미장 실전 교육 수강을 원하시면 아래 신청 폼을 작성해 주세요. 신청 후 2~3일 내 개별 유선 연락드립니다.</p>
+          <div class="contact-card-action">
+            <a href="https://form.naver.com/response/oeenoqRMMcj-AWypCbu50A" target="_blank" rel="noreferrer" class="btn btn-ocean">수강신청하기 →</a>
+          </div>
+        </div>
+        <div class="notice-box">
+          <p><strong>안내사항</strong></p>
+          <p>현장 작업 중에는 전화 응대가 어렵습니다. 톡톡 또는 신청 폼을 이용해 주시면 빠르게 확인 후 연락드립니다.</p>
+          <p>견적 문의 시 시공 위치, 면적, 원하시는 마감 종류를 함께 알려주시면 더 정확한 안내가 가능합니다.</p>
+        </div>
+      </div>
+      <div>
+        <div class="info-card">
+          <h3 class="info-card-title">아트푼타 정보</h3>
+          <div class="info-list">
+            <div class="info-row">
+              <span class="info-key">지역</span>
+              <span class="info-val">부산·경남 전 지역</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">분야</span>
+              <span class="info-val">유럽미장 · 특수페인트 · 방수 · 외벽스타코 · 도장</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">경력</span>
+              <span class="info-val">12년 현장 경력 / 시공 후 1년 하자 무상 A/S</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">교육</span>
+              <span class="info-val">유럽미장 실전 수익화 과정 (기존 시공기술자 대상)</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">SNS</span>
+              <span class="info-val">#art_punta_paint</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="ctn">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">ART PUNTA</div>
+        <p class="footer-tagline">부산·경남 마감시공 전문</p>
+      </div>
+      <nav class="footer-links" aria-label="하단 메뉴">
+        <a href="index.html">아트푼타 소개</a>
+        <a href="mptora52-education.html">아트푼타 교육</a>
+        <a href="mptora53-construction.html">아트푼타 시공</a>
+        <a href="mptqutum-story.html">아트푼타 이야기</a>
+        <a href="contact.html">CONTACT</a>
+      </nav>
+    </div>
+    <p class="footer-copy">Copyright 2025. ART PUNTA All Rights Reserved</p>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('navMenu');
+  toggle.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+    toggle.textContent = open ? '✕' : '☰';
+  });
+  document.addEventListener('click', e => {
+    if (!e.target.closest('#siteNav')) {
+      menu.classList.remove('open');
+      toggle.textContent = '☰';
+      toggle.setAttribute('aria-expanded', false);
+    }
+  });
+</script>
+</body>
+</html>

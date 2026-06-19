@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>아트푼타 이야기 | ART PUNTA</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" />
+  <style>
+    @font-face {
+      font-family: "WAGURI";
+      src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2311-1@1.1/WAGURITTF.woff2") format("woff2");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    :root {
+      --canvas:    #faf8f5;
+      --card:      #f2ede5;
+      --elevated:  #ece6dc;
+      --soft:      #f8f5f0;
+      --ink:       #1c1a18;
+      --body-c:    #4a4540;
+      --body-strong:#2c2820;
+      --muted:     #8a8278;
+      --hair:      #d2a378;
+      --hair-strong:#d2a378;
+      --flame:     #d43820;
+      --flame-light:#e55030;
+      --ocean:     #0fa8c8;
+      --ocean-light:#30bcd8;
+      --gold:      #f0b018;
+      --dark:      #0d2040;
+      --dark-mid:  #162e54;
+      --on-dark:   #f5f0e8;
+      --on-muted:  #a8a098;
+      --warning:   #e86820;
+      --success:   #2aaa62;
+      --danger:    #c82020;
+      --r:         6px;
+      --ease:      cubic-bezier(0.23,1,0.32,1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--canvas); color: var(--ink);
+      font-family: "Naver NanumSquare Neo", "NanumSquare Neo", "Pretendard", "Malgun Gothic", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .ctn { width: min(1160px, calc(100% - 40px)); margin-inline: auto; }
+
+    /* ── NAV ── */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 900; height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: rgba(250,248,245,0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--hair); }
+    .nav-brand { font-size: 17px; font-weight: 800; letter-spacing: 1.5px; font-family: "Pretendard", "Malgun Gothic", system-ui, sans-serif; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .nav-brand img { height: 34px; width: auto; display: block; }
+    .nav-menu { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-menu a { font-size: 14px; font-weight: 600; font-family: "Pretendard", "Malgun Gothic", system-ui, sans-serif; color: var(--body-c); text-decoration: none; white-space: nowrap; transition: color 140ms; }
+    .nav-menu a:hover, .nav-menu a[aria-current] { color: var(--ink); }
+    .nav-cta { background: var(--flame); color: var(--on-dark) !important; padding: 9px 18px; border-radius: var(--r); font-weight: 700 !important; transition: transform 150ms var(--ease) !important; }
+    .nav-cta:hover { transform: translateY(-1px); }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; color: var(--ink); font-size: 22px; line-height: 1; padding: 4px; }
+
+    /* ── HERO ── */
+    .hero {
+      padding-top: 60px;
+      background:
+        radial-gradient(ellipse at 82% 20%, rgba(15,168,200,0.18), transparent 44%),
+        linear-gradient(135deg, var(--dark), var(--dark-mid));
+      display: flex; align-items: flex-end;
+    }
+    .hero-inner { padding: 64px 0 72px; }
+    .hero-label { font-size: 20px; font-weight: 700; letter-spacing: 2.5px; font-family: "WAGURI", "Pretendard", "Malgun Gothic", system-ui, sans-serif; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .hero-hl { font-size: clamp(36px, 5.5vw, 64px); font-weight: 800; line-height: 1.12; letter-spacing: -1px; font-family: "Pretendard", "Malgun Gothic", system-ui, sans-serif; color: var(--on-dark); margin-bottom: 16px; }
+    .hero-sub { font-size: clamp(15px, 1.8vw, 18px); color: #fff; line-height: 1.7; }
+
+    /* ── SECTIONS ── */
+    .sec     { padding: 80px 0; }
+    .sec-dark { background: var(--dark); }
+    .sec-card { background: var(--card); }
+
+    .eyebrow { font-size: 20px; font-weight: 700; letter-spacing: 2px; font-family: "WAGURI", "Pretendard", "Malgun Gothic", system-ui, sans-serif; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+    .h2 { font-size: clamp(26px, 3.5vw, 40px); font-weight: 800; line-height: 1.15; letter-spacing: -0.5px; font-family: "Pretendard", "Malgun Gothic", system-ui, sans-serif; color: var(--ink); margin-bottom: 18px; }
+
+    /* STORY VISUALS */
+    .story-visuals {
+      margin-top: 38px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .story-visual-card {
+      position: relative;
+      min-height: 320px;
+      overflow: hidden;
+      border-radius: var(--r);
+      border: 1px solid var(--hair);
+      background: var(--dark);
+    }
+    .story-visual-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      display: block;
+      object-fit: cover;
+    }
+    .story-visual-caption {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      padding: 8px 12px;
+      border-radius: var(--r);
+      background: rgba(13, 32, 64, 0.88);
+      color: var(--gold);
+      font-family: "Pretendard", "Malgun Gothic", system-ui, sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── BLOG TABLE ── */
+    .blog-table-wrap { margin-top: 40px; border: 1px solid var(--hair); border-radius: var(--r); overflow: hidden; }
+    .blog-table { width: 100%; border-collapse: collapse; }
+    .blog-table thead th {
+      background: var(--dark); color: var(--on-dark);
+      font-size: 12px; font-weight: 700; letter-spacing: 0.5px;
+      padding: 14px 20px; text-align: left;
+    }
+    .blog-table thead th:last-child { text-align: right; width: 120px; }
+    .blog-table tbody tr {
+      border-bottom: 1px solid var(--hair);
+      cursor: default; transition: background 120ms;
+    }
+    .blog-table tbody tr:last-child { border-bottom: none; }
+    .blog-table tbody tr:hover { background: var(--card); }
+    .blog-table td { padding: 20px 20px; font-size: 15px; }
+    .blog-table td:first-child { color: var(--body-c); line-height: 1.55; }
+    .blog-table td.placeholder { color: var(--muted); font-style: italic; }
+    .blog-table td:last-child { text-align: right; font-size: 13px; color: var(--muted); font-weight: 600; white-space: nowrap; }
+
+    /* ── PAGINATION ── */
+    .pagination {
+      display: flex; justify-content: center; align-items: center;
+      gap: 4px; margin-top: 32px;
+    }
+    .pg-btn {
+      width: 36px; height: 36px; display: inline-flex;
+      align-items: center; justify-content: center;
+      border-radius: var(--r); font-size: 14px; font-weight: 600;
+      cursor: pointer; border: 1px solid var(--hair);
+      background: var(--canvas); color: var(--body-c);
+      transition: background 140ms, color 140ms;
+      text-decoration: none;
+    }
+    .pg-btn:hover { background: var(--elevated); }
+    .pg-btn.active { background: var(--dark); color: var(--on-dark); border-color: var(--hair); }
+    .pg-btn.arrow { color: var(--muted); }
+
+    /* ── PINNED SECTION ── */
+    .pin-header {
+      padding: 12px 20px;
+      background: var(--gold);
+      color: var(--dark);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      border-bottom: 1px solid var(--hair);
+    }
+    .pin-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--hair);
+      background: rgba(240,176,24,0.08);
+      text-decoration: none;
+      color: var(--dark);
+      font-size: 15px;
+      font-weight: 700;
+      transition: background 120ms;
+    }
+    .pin-row:hover { background: rgba(240,176,24,0.18); }
+    .pin-row-left { display: flex; align-items: center; gap: 8px; }
+    .pin-icon { font-size: 14px; flex-shrink: 0; }
+    .pin-arrow { color: var(--dark); font-weight: 700; font-size: 18px; opacity: 0.5; }
+
+    /* ── DIVIDER ── */
+    .board-divider {
+      height: 1px;
+      background: var(--hair-strong);
+      margin: 0;
+    }
+
+    /* ── RSS LIST ── */
+    .rss-list { list-style: none; }
+    .rss-list li {
+      border-bottom: 1px solid var(--hair);
+    }
+    .rss-list li:last-child { border-bottom: none; }
+    .rss-list a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px;
+      text-decoration: none;
+      color: var(--body-c);
+      font-size: 15px;
+      font-weight: 500;
+      transition: background 120ms, color 120ms;
+    }
+    .rss-list a:hover { background: var(--card); color: var(--ink); }
+    .rss-title { flex: 1; line-height: 1.5; }
+    .rss-date { font-size: 13px; color: var(--muted); font-weight: 600; white-space: nowrap; margin-left: 20px; }
+    .rss-status {
+      padding: 24px 20px;
+      font-size: 14px;
+      color: var(--muted);
+      text-align: center;
+    }
+    .rss-status a { color: var(--gold); font-weight: 700; text-decoration: none; }
+
+    /* ── RSS SECTION HEADER ── */
+    .rss-section-header {
+      padding: 12px 20px;
+      background: var(--dark);
+      color: var(--on-dark);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--hair);
+    }
+
+    /* ── PORTFOLIO BUTTON ── */
+    .portfolio-btn-wrap {
+      padding: 20px;
+      background: var(--canvas);
+      border-top: 1px solid var(--hair);
+      display: flex;
+      justify-content: center;
+    }
+    .portfolio-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: var(--dark);
+      color: var(--gold);
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: var(--r);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: background 140ms, transform 140ms var(--ease);
+    }
+    .portfolio-btn:hover { background: var(--dark-mid); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    .footer { background: var(--dark); padding: 56px 0 0; }
+    .footer-grid { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 36px; padding-bottom: 40px; border-bottom: 1px solid var(--hair); }
+    .footer-brand { font-size: 20px; font-weight: 800; color: var(--on-dark); letter-spacing: 1px; margin-bottom: 6px; }
+    .footer-tagline { font-size: 13px; color: var(--on-muted); }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+    .footer-links a { font-size: 14px; color: var(--on-muted); text-decoration: none; transition: color 140ms; }
+    .footer-links a:hover { color: var(--on-dark); }
+    .footer-cta { font-size: 14px; font-weight: 700; color: var(--gold); text-decoration: none; }
+    .footer-copy { padding: 20px 0; font-size: 12px; color: var(--on-muted); text-align: center; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .nav { padding: 0 20px; }
+      .nav-menu { display: none; flex-direction: column; gap: 0; position: fixed; top: 60px; left: 0; right: 0; background: rgba(250,248,245,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--hair); padding: 12px 0; z-index: 899; }
+      .nav-menu.open { display: flex; }
+      .nav-menu li { width: 100%; }
+      .nav-menu a { display: block; padding: 13px 20px; font-size: 15px; }
+      .nav-cta { margin: 8px 20px 4px; border-radius: var(--r); }
+      .nav-toggle { display: flex; }
+      .footer-grid { flex-direction: column; gap: 24px; }
+    }
+    @media (max-width: 640px) {
+      .sec { padding: 56px 0; }
+      .story-visuals { grid-template-columns: 1fr; gap: 14px; }
+      .story-visual-card, .story-visual-card img { min-height: 240px; }
+      .blog-table td { padding: 16px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="siteNav">
+  <a class="nav-brand" href="index.html"><img src="mq2b4qmm-로고-원본.png" alt="ART PUNTA 로고">ART PUNTA</a>
+  <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false">☰</button>
+  <ul class="nav-menu" id="navMenu" role="list">
+    <li><a href="index.html">아트푼타 소개</a></li>
+    <li><a href="mptora52-education.html">아트푼타 교육</a></li>
+    <li><a href="mptora53-construction.html">아트푼타 시공</a></li>
+    <li><a href="mptqutum-story.html" aria-current="page">아트푼타 이야기</a></li>
+    <li><a href="https://litt.ly/art_punta" target="_blank" rel="noreferrer" class="nav-cta">CONTACT</a></li>
+  </ul>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="ctn hero-inner">
+    <p class="hero-label">Field Story</p>
+    <h1 class="hero-hl">아트푼타 이야기</h1>
+    <p class="hero-sub">현장에서 직접 겪은 이야기를 전합니다</p>
+  </div>
+</section>
+
+<!-- BLOG BOARD -->
+<section class="sec">
+  <div class="ctn">
+    <p class="eyebrow">이야기</p>
+    <h2 class="h2">현장에서 온 글</h2>
+
+    <div class="blog-table-wrap">
+
+      <!-- 📌 고정 핀 영역 -->
+      <div class="pin-header">📌 필독 고정글</div>
+      <a href="https://blog.naver.com/wook5461/223384512385" target="_blank" rel="noreferrer" class="pin-row">
+        <span class="pin-row-left"><span class="pin-icon">📌</span><span>아트푼타 소개</span></span>
+        <span class="pin-arrow">→</span>
+      </a>
+      <a href="https://blog.naver.com/wook5461/224271485397" target="_blank" rel="noreferrer" class="pin-row">
+        <span class="pin-row-left"><span class="pin-icon">📌</span><span>아트푼타 강의 소개</span></span>
+        <span class="pin-arrow">→</span>
+      </a>
+
+      <!-- 구분선 -->
+      <div class="board-divider"></div>
+
+      <!-- 📚 강의 기록 -->
+      <div class="rss-section-header">📚 강의 기록</div>
+      <ul class="rss-list" id="rssLecture">
+        <li><p class="rss-status">글을 불러오는 중입니다...</p></li>
+      </ul>
+
+      <!-- 구분선 -->
+      <div class="board-divider"></div>
+
+      <!-- 📷 포트폴리오 -->
+      <div class="rss-section-header">📷 포트폴리오</div>
+      <ul class="rss-list" id="rssPortfolio">
+        <li><p class="rss-status">글을 불러오는 중입니다...</p></li>
+      </ul>
+
+      <!-- 포트폴리오 바로가기 버튼 -->
+      <div class="portfolio-btn-wrap">
+        <a href="https://blog.naver.com/PostList.naver?blogId=wook5461&from=postList&categoryNo=3" target="_blank" rel="noreferrer" class="portfolio-btn">
+          📷 포트폴리오 전체보기
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="ctn">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">ART PUNTA</div>
+        <p class="footer-tagline">부산·경남 마감시공 전문</p>
+      </div>
+      <nav class="footer-links" aria-label="푸터 메뉴">
+        <a href="index.html">아트푼타 소개</a>
+        <a href="mptora52-education.html">아트푼타 교육</a>
+        <a href="mptora53-construction.html">아트푼타 시공</a>
+        <a href="mptqutum-story.html">아트푼타 이야기</a>
+        <a href="https://litt.ly/art_punta" target="_blank" rel="noreferrer">CONTACT</a>
+      </nav>
+      <a class="footer-cta" href="https://litt.ly/art_punta" target="_blank" rel="noreferrer">litt.ly/art_punta →</a>
+    </div>
+    <p class="footer-copy">Copyright 2025. ART PUNTA All Rights Reserved</p>
+  </div>
+</footer>
+
+<script>
+  /* ── RSS 로드 ── */
+  (function () {
+    function formatDate(dateStr) {
+      const d = new Date(dateStr);
+      if (isNaN(d.getTime())) return '';
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return y + '.' + m + '.' + day;
+    }
+
+    // 전체 RSS에서 카테고리별로 필터링
+    const FULL_API = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent('https://rss.blog.naver.com/wook5461') + '&count=50';
+
+    fetch(FULL_API)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (!data.items || data.items.length === 0) throw new Error('no items');
+
+        // 강의 기록: 제목에 "강의" 포함 또는 카테고리 필터
+        var lectureItems = data.items.filter(function(item) {
+          return item.categories && item.categories.some(function(c) {
+            return c.indexOf('강의') !== -1;
+          });
+        }).slice(0, 10);
+
+        // 포트폴리오: categories에 포트폴리오 포함
+        var portfolioItems = data.items.filter(function(item) {
+          return item.categories && item.categories.some(function(c) {
+            return c.indexOf('포트폴리오') !== -1 || c.indexOf('portfolio') !== -1;
+          });
+        }).slice(0, 10);
+
+        // 강의 기록이 없으면 전체에서 10개
+        if (lectureItems.length === 0) {
+          lectureItems = data.items.slice(0, 10);
+        }
+
+        function renderList(elementId, items) {
+          var list = document.getElementById(elementId);
+          if (items.length === 0) {
+            list.innerHTML = '<li><p class="rss-status">블로그에서 직접 확인해주세요 &nbsp;<a href="https://blog.naver.com/wook5461" target="_blank" rel="noreferrer">→ 블로그 바로가기</a></p></li>';
+            return;
+          }
+          list.innerHTML = items.map(function(item) {
+            return '<li><a href="' + item.link + '" target="_blank" rel="noreferrer">' +
+              '<span class="rss-title">' + item.title + '</span>' +
+              '<span class="rss-date">' + formatDate(item.pubDate) + '</span>' +
+              '</a></li>';
+          }).join('');
+        }
+
+        renderList('rssLecture', lectureItems);
+        renderList('rssPortfolio', portfolioItems);
+      })
+      .catch(function() {
+        ['rssLecture', 'rssPortfolio'].forEach(function(id) {
+          document.getElementById(id).innerHTML =
+            '<li><p class="rss-status">블로그에서 직접 확인해주세요 &nbsp;<a href="https://blog.naver.com/wook5461" target="_blank" rel="noreferrer">→ 블로그 바로가기</a></p></li>';
+        });
+      });
+  })();
+
+  /* ── NAV ── */
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('navMenu');
+  toggle.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+    toggle.textContent = open ? '✕' : '☰';
+  });
+  document.addEventListener('click', e => {
+    if (!e.target.closest('#siteNav')) {
+      menu.classList.remove('open');
+      toggle.textContent = '☰';
+      toggle.setAttribute('aria-expanded', false);
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,657 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ART PUNTA | 부산·경남 마감시공 전문</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" />
+  <style>
+    @font-face {
+      font-family: "WAGURI";
+      src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2311-1@1.1/WAGURITTF.woff2") format("woff2");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    :root {
+      --canvas:    #faf8f5;
+      --card:      #f2ede5;
+      --elevated:  #ece6dc;
+      --soft:      #f8f5f0;
+      --ink:       #1c1a18;
+      --body-c:    #4a4540;
+      --body-strong:#2c2820;
+      --muted:     #8a8278;
+      --hair:      #d2a378;
+      --hair-strong:#d2a378;
+      --flame:     #d43820;
+      --flame-light:#e55030;
+      --ocean:     #0fa8c8;
+      --ocean-light:#30bcd8;
+      --gold:      #f0b018;
+      --hero-gold: #f5c200;
+      --hero-dark: #d4a800;
+      --dark:      #0d2040;
+      --dark-mid:  #162e54;
+      --on-dark:   #f5f0e8;
+      --on-muted:  #a8a098;
+      --warning:   #e86820;
+      --success:   #2aaa62;
+      --danger:    #c82020;
+      --r:         6px;
+      --ease:      cubic-bezier(0.23,1,0.32,1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: "Naver NanumSquare Neo", "NanumSquare Neo", "Pretendard", "Malgun Gothic", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .ctn { width: min(1160px, calc(100% - 40px)); margin-inline: auto; }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+      height: 60px; display: flex; align-items: center;
+      justify-content: space-between; padding: 0 48px;
+      background: rgba(250,248,245,0.95);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--hair);
+    }
+    .nav-brand {
+      font-size: 17px; font-weight: 800; letter-spacing: 1.5px;
+      font-family: "Pretendard", "Malgun Gothic", system-ui, sans-serif;
+      color: var(--ink); text-decoration: none; flex-shrink: 0;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-brand img { height: 34px; width: auto; display: block; }
+    .nav-menu {
+      display: flex; align-items: center; gap: 28px; list-style: none;
+    }
+    .nav-menu a {
+      font-size: 14px; font-weight: 600; color: var(--body-c);
+      font-family: "Pretendard", "Malgun Gothic", system-ui, sans-serif;
+      text-decoration: none; white-space: nowrap; transition: color 140ms;
+    }
+    .nav-menu a:hover, .nav-menu a[aria-current] { color: var(--ink); }
+    .nav-cta {
+      background: var(--flame); color: var(--on-dark) !important;
+      padding: 9px 18px; border-radius: var(--r); font-weight: 700 !important;
+      transition: transform 150ms var(--ease) !important;
+    }
+    .nav-cta:hover { transform: translateY(-1px); }
+    .nav-toggle {
+      display: none; background: none; border: none; cursor: pointer;
+      color: var(--ink); font-size: 22px; line-height: 1; padding: 4px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 72vh;
+      background: url("about-bg.webp") center / cover no-repeat;
+      display: flex; align-items: center;
+      padding-top: 60px; overflow: hidden; position: relative;
+    }
+    .hero::after {
+      content: none;
+    }
+    .hero-mobile-img { display: none; }
+    .hero-inner { position: relative; z-index: 1; padding: 40px 0; }
+    .hero-eyebrow {
+      font-size: 20px; font-weight: 700; letter-spacing: 2.5px;
+      font-family: "WAGURI", "Pretendard", "Malgun Gothic", system-ui, sans-serif;
+      text-transform: uppercase; color: var(--hero-gold); margin-bottom: 24px;
+    }
+    .hero-hl {
+      font-size: clamp(36px, 6vw, 76px);
+      font-weight: 800; line-height: 1.1; letter-spacing: -1.5px;
+      font-family: "WAGURI", "Pretendard", "Malgun Gothic", system-ui, sans-serif;
+      color: #fff; margin-bottom: 24px;
+    }
+    .hero-brand {
+      font-size: clamp(16px, 1.8vw, 20px);
+      font-weight: 800; letter-spacing: 4px;
+      font-family: "Pretendard", "Malgun Gothic", system-ui, sans-serif;
+      color: #fff; margin-bottom: 22px;
+    }
+    .hero-sub {
+      font-size: clamp(16px, 1.8vw, 20px);
+      line-height: 1.7; color: #fff;
+      margin-bottom: 36px; max-width: 520px;
+    }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* ── TICKER ── */
+    .ticker {
+      background: var(--dark-mid); padding: 14px 0; overflow: hidden;
+      border-bottom: 1px solid var(--hair);
+    }
+    .ticker-track {
+      display: flex; width: max-content;
+      animation: tickerMove 32s linear infinite;
+    }
+    .ticker-track span {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.3px;
+      color: var(--gold); white-space: nowrap;
+    }
+    @keyframes tickerMove {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } }
+
+    /* ── SECTIONS ── */
+    .sec     { padding: 88px 0; }
+    .sec-dark { background: var(--dark); }
+    .sec-card { background: var(--card); }
+
+    .eyebrow {
+      font-size: 20px; font-weight: 700; letter-spacing: 2px;
+      font-family: "WAGURI", "Pretendard", "Malgun Gothic", system-ui, sans-serif;
+      text-transform: uppercase; color: var(--ocean-light); margin-bottom: 14px;
+    }
+    .eyebrow-flame { color: var(--flame); }
+    .h2 {
+      font-size: clamp(28px, 4vw, 46px);
+      font-weight: 800; line-height: 1.15; letter-spacing: -0.5px;
+      font-family: "Pretendard", "Malgun Gothic", system-ui, sans-serif;
+      color: var(--ink); margin-bottom: 18px;
+    }
+    .h2-dark { color: var(--on-dark); }
+    .lead { font-size: 17px; line-height: 1.85; color: var(--body-c); }
+
+    /* ── INTRO ── */
+    .split {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .site-gallery {
+      position: relative;
+      min-width: 0;
+    }
+    .site-gallery-viewport {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      border-radius: var(--r);
+      border: 1px solid var(--hair);
+      background: var(--soft);
+    }
+    .site-gallery-viewport::-webkit-scrollbar { display: none; }
+    .site-gallery-track {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 100%;
+    }
+    .site-photo {
+      position: relative;
+      aspect-ratio: 4/3;
+      scroll-snap-align: start;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(224, 60, 38, 0.16), transparent 34%),
+        linear-gradient(135deg, #071425, #102944 58%, #071425);
+    }
+    .site-photo:nth-child(1) {
+      background: url("about-gallery-3.webp") center / contain no-repeat, linear-gradient(135deg, #071425, #102944 58%, #071425);
+    }
+    .site-photo:nth-child(2) {
+      background: url("about-gallery-2.webp") center / contain no-repeat, linear-gradient(135deg, #071425, #102944 58%, #071425);
+    }
+    .site-photo:nth-child(3) {
+      background: url("about-gallery-4.webp") center / contain no-repeat, linear-gradient(135deg, #071425, #102944 58%, #071425);
+    }
+    .site-photo:nth-child(4) {
+      background: url("about-gallery-1.webp") center / contain no-repeat, linear-gradient(135deg, #071425, #102944 58%, #071425);
+    }
+    .site-photo img {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .site-photo-label {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid var(--hair);
+      background: rgba(255, 255, 255, 0.62);
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+    .site-gallery-controls {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+    .gallery-btn {
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--hair);
+      border-radius: 50%;
+      background: rgba(13, 32, 64, 0.9);
+      color: var(--on-dark);
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+      pointer-events: auto;
+      transition: background 180ms var(--ease), transform 180ms var(--ease);
+    }
+    .gallery-btn:hover {
+      background: var(--ocean);
+      color: var(--on-dark);
+      transform: translateY(-2px);
+    }
+    .site-gallery-note {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── STRENGTHS ── */
+    .strengths {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 20px; margin-top: 48px;
+    }
+    .s-card {
+      background: var(--canvas); border: 1px solid var(--hair);
+      border-radius: var(--r); padding: 36px 28px;
+    }
+    .s-num {
+      font-size: 12px; font-weight: 700; letter-spacing: 1px;
+      color: var(--flame); margin-bottom: 16px;
+    }
+    .s-title { font-size: 21px; font-weight: 800; color: var(--ink); margin-bottom: 12px; line-height: 1.25; }
+    .s-desc  { font-size: 15px; line-height: 1.85; color: var(--body-c); }
+
+    /* ── LOCATION ── */
+    .location-panel {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.82fr) minmax(360px, 1.18fr);
+      gap: 28px;
+      align-items: stretch;
+      margin-top: 48px;
+      padding: 28px;
+      border: 1px solid var(--hair);
+      border-radius: var(--r);
+      background: var(--soft);
+    }
+    .location-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 260px;
+    }
+    .location-title {
+      margin: 12px 0 18px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.1;
+      font-weight: 900;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+    .location-address {
+      font-size: 18px;
+      line-height: 1.75;
+      font-weight: 700;
+      color: var(--body-strong);
+    }
+    .location-note {
+      margin-top: 14px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+    .map-frame {
+      position: relative;
+      display: block;
+      min-height: 300px;
+      overflow: hidden;
+      border: 1px solid var(--hair);
+      border-radius: var(--r);
+      background: var(--card);
+    }
+    .map-frame iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 300px;
+      border: 0;
+      display: block;
+    }
+
+    /* ── QUOTE ── */
+    .quote-wrap { max-width: 740px; margin: 0 auto; text-align: center; }
+    .q-mark {
+      display: block; font-size: 64px; line-height: 0.8;
+      font-weight: 800; color: var(--gold); opacity: 0.45;
+      margin-bottom: 20px;
+    }
+    .q-text {
+      font-size: clamp(22px, 3vw, 34px); font-weight: 700;
+      line-height: 1.55; color: var(--on-dark); margin-bottom: 22px;
+    }
+    .q-attr { font-size: 14px; color: var(--on-muted); font-weight: 600; letter-spacing: 0.5px; }
+
+    /* ── TAGS ── */
+    .tags-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .tag {
+      display: inline-flex; align-items: center; height: 34px;
+      padding: 0 14px; border-radius: var(--r);
+      background: var(--gold); color: var(--dark);
+      font-family: "WAGURI", "Pretendard", "Malgun Gothic", system-ui, sans-serif;
+      font-size: 14px; font-weight: 700;
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      height: 48px; padding: 0 24px; border-radius: var(--r);
+      font-size: 15px; font-weight: 700; text-decoration: none;
+      font-family: "Pretendard", "Malgun Gothic", system-ui, sans-serif;
+      letter-spacing: 0.2px; transition: transform 180ms var(--ease);
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-ocean { background: var(--ocean); color: var(--on-dark); }
+    .btn-ocean:hover { background: var(--ocean-light); }
+    .btn-ghost-dark { border: 1.5px solid var(--hair); color: var(--on-dark); }
+    .btn-ghost { border: 1.5px solid var(--hair); color: var(--ink); }
+    .btn-flame { background: var(--flame); color: var(--on-dark); }
+    .btn-flame:hover { background: var(--flame-light); }
+
+    /* ── FOOTER ── */
+    .footer { background: var(--dark); padding: 56px 0 0; }
+    .footer-grid {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      flex-wrap: wrap; gap: 36px; padding-bottom: 40px;
+      border-bottom: 1px solid var(--hair);
+    }
+    .footer-brand { font-size: 20px; font-weight: 800; color: var(--on-dark); letter-spacing: 1px; margin-bottom: 6px; }
+    .footer-tagline { font-size: 13px; color: var(--on-muted); }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+    .footer-links a { font-size: 14px; color: var(--on-muted); text-decoration: none; transition: color 140ms; }
+    .footer-links a:hover { color: var(--on-dark); }
+    .footer-cta { font-size: 14px; font-weight: 700; color: var(--gold); text-decoration: none; }
+    .footer-copy { padding: 20px 0; font-size: 12px; color: var(--on-muted); text-align: center; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .nav { padding: 0 20px; }
+      .nav-menu {
+        display: none; flex-direction: column; gap: 0;
+        position: fixed; top: 60px; left: 0; right: 0;
+        background: rgba(250,248,245,0.98); backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--hair); padding: 12px 0; z-index: 899;
+      }
+      .nav-menu.open { display: flex; }
+      .nav-menu li { width: 100%; }
+      .nav-menu a { display: block; padding: 13px 20px; font-size: 15px; }
+      .nav-cta { margin: 8px 20px 4px; border-radius: var(--r); }
+      .nav-toggle { display: flex; }
+      .split { grid-template-columns: 1fr; gap: 36px; }
+      .strengths { grid-template-columns: 1fr; gap: 16px; }
+      .location-panel { grid-template-columns: 1fr; padding: 20px; gap: 20px; }
+      .location-copy { min-height: auto; }
+      .map-frame,
+      .map-frame iframe { min-height: 260px; }
+      .footer-grid { flex-direction: column; gap: 24px; }
+    }
+    @media (max-width: 640px) {
+      .hero {
+        min-height: 0;
+        display: block;
+        padding-top: 60px;
+        background: transparent;
+      }
+      .hero-mobile-img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .hero-inner {
+        display: none;
+      }
+      .hero-eyebrow,
+      .hero-hl,
+      .hero-brand,
+      .hero-sub {
+        display: none;
+      }
+      .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .hero-actions .btn {
+        width: 100%;
+        height: 46px;
+        justify-content: center;
+        padding: 0 14px;
+        font-size: 14px;
+      }
+      .hero-actions .btn-ghost-dark {
+        color: var(--ink);
+        border-color: var(--hair);
+      }
+      .sec { padding: 64px 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="siteNav">
+  <a class="nav-brand" href="index.html"><img src="logo.webp" alt="ART PUNTA 로고">ART PUNTA</a>
+  <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false">☰</button>
+  <ul class="nav-menu" id="navMenu" role="list">
+    <li><a href="index.html" aria-current="page">아트푼타 소개</a></li>
+    <li><a href="mptora52-education.html">아트푼타 교육</a></li>
+    <li><a href="mptora53-construction.html">아트푼타 시공</a></li>
+    <li><a href="mptqutum-story.html">아트푼타 이야기</a></li>
+    <li><a href="contact.html" class="nav-cta">CONTACT</a></li>
+  </ul>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <img class="hero-mobile-img" src="about-hero.webp" alt="ART PUNTA 업체소개 모바일 히어로" />
+  <div class="ctn hero-inner">
+    <p class="hero-eyebrow">부산·경남 인테리어 마감 시공 전문</p>
+    <h1 class="hero-hl">디테일에<br>목숨 걸자</h1>
+
+
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>유럽미장 ㅣ 마이크로시멘트 ㅣ 방수시공 ㅣ 특수페인트 ㅣ 스타코 ㅣ 오일스테인 ㅣ ART PUNTA ㅣ 디테일에 목숨 걸자 ㅣ 부산·경남 마감시공 전문 ㅣ 책임시공 ㅣ 1년 하자 무상 A/S ㅣ&nbsp;</span>
+    <span>유럽미장 ㅣ 마이크로시멘트 ㅣ 방수시공 ㅣ 특수페인트 ㅣ 스타코 ㅣ 오일스테인 ㅣ ART PUNTA ㅣ 디테일에 목숨 걸자 ㅣ 부산·경남 마감시공 전문 ㅣ 책임시공 ㅣ 1년 하자 무상 A/S ㅣ&nbsp;</span>
+  </div>
+</div>
+
+<!-- SECTION 2: INTRO -->
+<section class="sec">
+  <div class="ctn">
+    <div class="split">
+      <div>
+        <p class="eyebrow">12년 현장 경력</p>
+        <h2 class="h2">12년간 현장을 지켜온<br>베테랑 페인터</h2>
+        <p class="lead" style="margin-bottom:32px;">페인트·유럽미장·방수 시공 전문 업체입니다</p>
+        <a href="mptora53-construction.html#portfolio" class="btn btn-ghost">시공 포트폴리오 →</a>
+      </div>
+      <div class="site-gallery" aria-label="시공 현장 이미지 갤러리">
+        <div class="site-gallery-viewport" id="siteGallery">
+          <div class="site-gallery-track">
+            <figure class="site-photo">
+              <span class="site-photo-label">시공 현장 이미지 01</span>
+            </figure>
+            <figure class="site-photo">
+              <span class="site-photo-label">시공 현장 이미지 02</span>
+            </figure>
+            <figure class="site-photo">
+              <span class="site-photo-label">시공 현장 이미지 03</span>
+            </figure>
+            <figure class="site-photo">
+              <span class="site-photo-label">시공 현장 이미지 04</span>
+            </figure>
+          </div>
+        </div>
+        <div class="site-gallery-controls" aria-hidden="true">
+          <button class="gallery-btn" type="button" data-gallery-dir="-1">‹</button>
+          <button class="gallery-btn" type="button" data-gallery-dir="1">›</button>
+        </div>
+        <p class="site-gallery-note">좌우 버튼 또는 트랙패드로 4장까지 넘겨볼 수 있습니다</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: STRENGTHS -->
+<section class="sec sec-card">
+  <div class="ctn">
+    <p class="eyebrow">아트푼타의 강점</p>
+    <h2 class="h2">선택받는 3가지 이유</h2>
+    <div class="strengths">
+      <div class="s-card">
+        <p class="s-num">01.</p>
+        <h3 class="s-title">합리적인 비용</h3>
+        <p class="s-desc">공기 지연 없는 시공 원칙. 야간작업도 강행하며 일정을 지킵니다. 견적은 주야간 구분 없이 시공 규모로 안내드립니다</p>
+      </div>
+      <div class="s-card">
+        <p class="s-num">02.</p>
+        <h3 class="s-title">책임시공</h3>
+        <p class="s-desc">시공 후 1년간 하자 무상 A/S 보증서 발급. 한 번만 같이 일한 사장님은 없습니다</p>
+      </div>
+      <div class="s-card">
+        <p class="s-num">03.</p>
+        <h3 class="s-title">인테리어 감각</h3>
+        <p class="s-desc">30-40대 젊은 팀으로 구성. 트렌드를 반영한 디테일한 마감을 제공합니다</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: LOCATION -->
+<section class="sec">
+  <div class="ctn">
+    <div class="location-panel">
+      <div class="location-copy">
+        <p class="eyebrow">오시는 길</p>
+        <h2 class="location-title">LOCATION</h2>
+        <p class="location-address">부산 해운대구 좌동순환로433번길 22 3층 아트푼타</p>
+        <p class="location-note">방문 상담은 사전 예약 후 가능합니다</p>
+      </div>
+      <div class="map-frame" aria-label="부산 해운대구 좌동순환로433번길 22 3층 아트푼타 구글 지도">
+        <iframe
+          title="아트푼타 위치 지도"
+          src="https://www.google.com/maps?q=%EB%B6%80%EC%82%B0%20%ED%95%B4%EC%9A%B4%EB%8C%80%EA%B5%AC%20%EC%A2%8C%EB%8F%99%EC%88%9C%ED%99%98%EB%A1%9C433%EB%B2%88%EA%B8%B8%2022%203%EC%B8%B5%20%EC%95%84%ED%8A%B8%ED%91%BC%ED%83%80&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: QUOTE -->
+<section class="sec sec-dark">
+  <div class="ctn">
+    <div class="quote-wrap">
+      <span class="q-mark">"</span>
+      <p class="q-text">작업 완성도에 있어서는<br>아트푼타의 기준을 고객보다<br>항상 높게 둡니다</p>
+      <p class="q-attr">— 아트푼타 대표</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: TAGS -->
+<section class="sec" style="padding:60px 0;">
+  <div class="ctn">
+    <p class="eyebrow">시공 분야</p>
+    <p class="h2" style="font-size:clamp(20px,2.5vw,28px);margin-bottom:8px;">전문 시공 영역</p>
+    <div class="tags-row">
+      <span class="tag">유럽미장</span>
+      <span class="tag">방수시공</span>
+      <span class="tag">특수페인트</span>
+      <span class="tag">스타코</span>
+      <span class="tag">마이크로시멘트</span>
+      <span class="tag">오일스테인</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="ctn">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">ART PUNTA</div>
+        <p class="footer-tagline">부산·경남 마감시공 전문</p>
+      </div>
+      <nav class="footer-links" aria-label="푸터 메뉴">
+        <a href="index.html">아트푼타 소개</a>
+        <a href="mptora52-education.html">아트푼타 교육</a>
+        <a href="mptora53-construction.html">아트푼타 시공</a>
+        <a href="mptqutum-story.html">아트푼타 이야기</a>
+        <a href="contact.html">CONTACT</a>
+      </nav>
+      
+    </div>
+    <p class="footer-copy">Copyright 2025. ART PUNTA All Rights Reserved</p>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('navMenu');
+  toggle.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+    toggle.textContent = open ? '✕' : '☰';
+  });
+  document.addEventListener('click', e => {
+    if (!e.target.closest('#siteNav')) {
+      menu.classList.remove('open');
+      toggle.textContent = '☰';
+      toggle.setAttribute('aria-expanded', false);
+    }
+  });
+
+  const gallery = document.getElementById('siteGallery');
+  const galleryItems = gallery ? Array.from(gallery.querySelectorAll('.site-photo')) : [];
+  let galleryIndex = 0;
+  document.querySelectorAll('[data-gallery-dir]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!gallery || !galleryItems.length) return;
+      const dir = Number(btn.dataset.galleryDir || 1);
+      galleryIndex = (galleryIndex + dir + galleryItems.length) % galleryItems.length;
+      gallery.scrollTo({
+        left: galleryItems[galleryIndex].offsetLeft,
+        behavior: 'smooth'
+      });
+    });
+  });
+</script>
+</body>
+</html>
+
+
