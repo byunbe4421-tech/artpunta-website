@@ -8,6 +8,48 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-MMBV5Q6T');</script>
   <!-- End Google Tag Manager -->
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1423865953113327');
+  // ── 로컬/파일 테스트에서는 전송 차단 (invalid.invalid 데이터 오염 방지) ──
+  (function(){
+    var hn = location.hostname;
+    window.__mpLive = location.protocol.indexOf('http') === 0 && hn &&
+      !/^(localhost|127\.|0\.0\.0\.0|192\.168\.|10\.)/.test(hn);
+  })();
+  // ── 브라우저 픽셀 + Conversions API 동시 전송 (event_id 중복제거) ──
+  (function(){
+    function uuid(){return 'xxxxxxxxxxxx4xxx'.replace(/x/g,function(){return (Math.random()*16|0).toString(16);})+'-'+Date.now().toString(16);}
+    function ck(n){var m=document.cookie.match('(^|; )'+n+'=([^;]*)');return m?decodeURIComponent(m[2]):undefined;}
+    window.mpTrack=function(name,custom,opts){
+      opts=opts||{};
+      if(!window.__mpLive) return;            // 라이브 도메인에서만 발화
+      var eid=uuid(), method=opts.custom?'trackCustom':'track';
+      if(window.fbq) fbq(method,name,custom||{},{eventID:eid});
+      if(opts.capi){
+        try{
+          fetch('/.netlify/functions/capi',{
+            method:'POST', keepalive:true,
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({event_name:name,event_id:eid,event_source_url:location.href,fbp:ck('_fbp'),fbc:ck('_fbc'),custom_data:custom||{}})
+          });
+        }catch(e){}
+      }
+    };
+  })();
+  mpTrack('PageView',{},{capi:true});
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1423865953113327&ev=PageView&noscript=1"/></noscript>
+  <!-- End Meta Pixel Code -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>아트푼타 교육 | ART PUNTA</title>
@@ -841,7 +883,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="enroll-cta">
       <p class="enroll-cta-sub">신청 후 2~3일 내 개별 유선 연락드리겠습니다</p>
-      <a href="https://form.naver.com/response/oeenoqRMMcj-AWypCbu50A" target="_blank" rel="noreferrer" class="btn btn-flame">수강신청하기 →</a>
+      <a href="https://form.naver.com/response/oeenoqRMMcj-AWypCbu50A" target="_blank" rel="noreferrer" class="btn btn-flame" onclick="if(window.mpTrack){mpTrack('Lead',{content_name:'유럽미장 수강신청'},{capi:true});}">수강신청하기 →</a>
     </div>
   </div>
 </section>
@@ -915,6 +957,44 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     };
     btn.addEventListener('click', toggleDay);
   });
+
+  // ===== Meta Pixel - 행동/전환 이벤트 =====
+  (function(){
+    if(!window.fbq) return;
+
+    // 핵심 콘텐츠 조회
+    mpTrack('ViewContent',{content_name:'유럽미장 교육 랜딩'},{capi:true});
+
+    // 문의(CONTACT) 클릭
+    var contactBtn = document.querySelector('.nav-cta');
+    if(contactBtn){ contactBtn.addEventListener('click', function(){ mpTrack('Contact',{},{capi:true}); }); }
+
+    // 스크롤 깊이 25/50/75/90%
+    var marks=[25,50,75,90], sFired={};
+    window.addEventListener('scroll', function(){
+      var h=document.documentElement;
+      var pct=(h.scrollTop + window.innerHeight) / h.scrollHeight * 100;
+      marks.forEach(function(m){ if(pct>=m && !sFired[m]){ sFired[m]=1; mpTrack('Scroll'+m,{},{custom:true}); } });
+    }, {passive:true});
+
+    // 체류 시간 30/60/120초
+    [30,60,120].forEach(function(s){ setTimeout(function(){ mpTrack('TimeOnPage_'+s+'s',{},{custom:true}); }, s*1000); });
+
+    // 커리큘럼 펼침(1회)
+    var curFired=false;
+    document.querySelectorAll('.day-btn').forEach(function(b){
+      b.addEventListener('click', function(){ if(!curFired){ curFired=true; mpTrack('ViewCurriculum',{},{custom:true}); } });
+    });
+
+    // 모집요강 섹션 도달 = 고구매의도
+    var rec=document.querySelector('.recruitment-card');
+    if(rec && 'IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){
+        es.forEach(function(e){ if(e.isIntersecting){ mpTrack('ViewRecruitment',{},{custom:true}); io.disconnect(); } });
+      },{threshold:0.4});
+      io.observe(rec);
+    }
+  })();
 </script>
 </body>
 </html>
