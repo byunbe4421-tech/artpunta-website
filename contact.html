@@ -10,29 +10,25 @@
   <!-- End Google Tag Manager -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CONTACT | ART PUNTA</title>
+  <title>문의하기 | ART PUNTA</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
   <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" />
   <style>
-    @font-face {
-      font-family: "WAGURI";
-      src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2311-1@1.1/WAGURITTF.woff2") format("woff2");
-      font-weight: normal; font-style: normal; font-display: swap;
-    }
     :root {
       --canvas: #faf8f5; --card: #f2ede5; --elevated: #ece6dc; --soft: #f8f5f0;
       --ink: #1c1a18; --body-c: #4a4540; --body-strong: #2c2820; --muted: #8a8278;
-      --hair: #d2a378; --flame: #d43820; --flame-light: #e55030;
-      --ocean: #0fa8c8; --ocean-light: #30bcd8; --gold: #f0b018;
+      --hair: #d2c4b0; --flame: #d43820; --flame-light: #e55030;
+      --ocean: #0fa8c8; --gold: #f0b018;
       --dark: #0d2040; --on-dark: #f5f0e8; --on-muted: #a8a098;
       --r: 6px; --ease: cubic-bezier(0.23,1,0.32,1);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { background: var(--canvas); color: var(--ink); font-family: "Naver NanumSquare Neo", "NanumSquare Neo", "Pretendard", "Malgun Gothic", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
-    .ctn { width: min(1160px, calc(100% - 40px)); margin-inline: auto; }
+    .ctn { width: min(760px, calc(100% - 40px)); margin-inline: auto; }
 
+    /* NAV */
     .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 900; height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: rgba(250,248,245,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--hair); }
     .nav-brand { font-size: 17px; font-weight: 800; letter-spacing: 1.5px; font-family: "Pretendard", system-ui, sans-serif; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 8px; }
     .nav-brand img { height: 34px; width: auto; display: block; }
@@ -42,45 +38,57 @@
     .nav-cta { background: var(--flame); color: var(--on-dark) !important; padding: 9px 18px; border-radius: var(--r); font-weight: 700 !important; }
     .nav-toggle { display: none; background: none; border: none; cursor: pointer; color: var(--ink); font-size: 22px; padding: 4px; }
 
-    .hero { min-height: 52vh; background: var(--dark); display: flex; align-items: center; padding-top: 60px; }
-    .hero-inner { padding: 72px 0; }
-    .hero-label { font-size: 13px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; font-family: "Pretendard", system-ui, sans-serif; }
-    .hero-hl { font-size: clamp(36px, 6vw, 72px); font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; font-family: "Pretendard", system-ui, sans-serif; color: var(--on-dark); margin-bottom: 20px; }
-    .hero-sub { font-size: clamp(16px, 1.8vw, 20px); color: rgba(245,240,232,0.75); line-height: 1.7; }
+    /* PAGE HEADER */
+    .page-header { padding-top: 60px; background: var(--canvas); border-bottom: 1px solid var(--hair); }
+    .page-header-inner { padding: 40px 0 32px; }
+    .page-header h1 { font-size: 28px; font-weight: 800; font-family: "Pretendard", system-ui, sans-serif; color: var(--ink); }
 
-    .sec { padding: 88px 0; }
-    .sec-card { background: var(--card); }
-    .eyebrow { font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--flame); margin-bottom: 14px; font-family: "Pretendard", system-ui, sans-serif; }
-    .h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 800; line-height: 1.15; letter-spacing: -0.5px; font-family: "Pretendard", system-ui, sans-serif; color: var(--ink); margin-bottom: 18px; }
+    /* FORM SECTION */
+    .form-sec { padding: 72px 0 100px; }
+    .form-eyebrow { font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--flame); margin-bottom: 12px; font-family: "Pretendard", system-ui, sans-serif; text-align: center; }
+    .form-heading { font-size: clamp(26px, 4vw, 40px); font-weight: 800; line-height: 1.2; letter-spacing: -0.5px; font-family: "Pretendard", system-ui, sans-serif; color: var(--ink); text-align: center; margin-bottom: 10px; }
+    .form-sub { font-size: 15px; color: var(--body-c); text-align: center; margin-bottom: 48px; }
 
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 48px; align-items: start; }
-    .contact-methods { display: flex; flex-direction: column; gap: 16px; }
-    .contact-card { background: var(--canvas); border: 1px solid var(--hair); border-radius: var(--r); padding: 32px; display: flex; flex-direction: column; gap: 12px; }
-    .contact-card-label { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--flame); }
-    .contact-card-title { font-size: 20px; font-weight: 800; color: var(--ink); font-family: "Pretendard", system-ui, sans-serif; }
-    .contact-card-desc { font-size: 15px; line-height: 1.7; color: var(--body-c); }
-    .contact-card-action { margin-top: 8px; }
+    .contact-form { display: flex; flex-direction: column; gap: 28px; }
 
-    .notice-box { background: var(--elevated); border-radius: var(--r); padding: 28px 32px; margin-top: 16px; }
-    .notice-box p { font-size: 15px; line-height: 1.7; color: var(--body-c); }
-    .notice-box p + p { margin-top: 8px; }
-    .notice-box strong { color: var(--ink); font-weight: 700; }
+    .field { display: flex; flex-direction: column; gap: 8px; }
+    .field-label { font-size: 14px; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 4px; }
+    .field-label .req { color: var(--flame); font-size: 16px; line-height: 1; }
 
-    .info-card { background: var(--dark); border-radius: var(--r); padding: 40px; }
-    .info-card-title { font-size: 22px; font-weight: 800; color: var(--on-dark); margin-bottom: 24px; font-family: "Pretendard", system-ui, sans-serif; }
-    .info-list { display: flex; flex-direction: column; gap: 16px; }
-    .info-row { display: flex; gap: 12px; }
-    .info-key { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); min-width: 64px; padding-top: 2px; }
-    .info-val { font-size: 15px; line-height: 1.6; color: rgba(245,240,232,0.8); }
+    /* Privacy box */
+    .privacy-box { border: 1px solid var(--hair); border-radius: var(--r); background: #fff; padding: 16px 18px; height: 130px; overflow-y: auto; font-size: 13px; line-height: 1.75; color: var(--body-c); }
+    .privacy-box h4 { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+    .privacy-box p { margin-bottom: 6px; }
 
-    .btn { display: inline-flex; align-items: center; gap: 6px; height: 48px; padding: 0 24px; border-radius: var(--r); font-size: 15px; font-weight: 700; font-family: "Pretendard", system-ui, sans-serif; text-decoration: none; transition: transform 180ms var(--ease); }
-    .btn:hover { transform: translateY(-2px); }
-    .btn-flame { background: var(--flame); color: var(--on-dark); }
-    .btn-flame:hover { background: var(--flame-light); }
-    .btn-ocean { background: var(--ocean); color: var(--on-dark); }
+    .checkbox-row { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+    .checkbox-row input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--flame); cursor: pointer; flex-shrink: 0; }
+    .checkbox-row label { font-size: 14px; color: var(--body-c); cursor: pointer; }
 
+    /* Inputs */
+    .input { width: 100%; height: 52px; padding: 0 16px; border: 1px solid var(--hair); border-radius: var(--r); background: #fff; font-size: 15px; font-family: inherit; color: var(--ink); outline: none; transition: border-color 150ms; }
+    .input:focus { border-color: var(--flame); }
+    .input::placeholder { color: var(--muted); }
+
+    .phone-row { display: flex; align-items: center; gap: 8px; }
+    .phone-row .input { text-align: center; }
+    .phone-sep { font-size: 18px; color: var(--muted); flex-shrink: 0; }
+
+    textarea.input { height: 160px; padding: 14px 16px; resize: vertical; }
+
+    /* Submit */
+    .submit-wrap { margin-top: 8px; }
+    .btn-submit { width: 100%; height: 56px; background: var(--flame); color: var(--on-dark); border: none; border-radius: var(--r); font-size: 16px; font-weight: 700; font-family: "Pretendard", system-ui, sans-serif; cursor: pointer; letter-spacing: 0.5px; transition: background 150ms, transform 180ms var(--ease); }
+    .btn-submit:hover { background: var(--flame-light); transform: translateY(-2px); }
+
+    /* Alert */
+    .form-alert { display: none; padding: 16px 20px; border-radius: var(--r); font-size: 14px; font-weight: 600; margin-top: -8px; }
+    .form-alert.error { background: #fef2f2; color: #b91c1c; border: 1px solid #fca5a5; display: block; }
+    .form-alert.success { background: #f0fdf4; color: #166534; border: 1px solid #86efac; display: block; }
+
+    /* FOOTER */
     .footer { background: var(--dark); padding: 56px 0 0; }
-    .footer-grid { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 36px; padding-bottom: 40px; border-bottom: 1px solid var(--hair); }
+    .footer .ctn { width: min(1160px, calc(100% - 40px)); margin-inline: auto; }
+    .footer-grid { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 36px; padding-bottom: 40px; border-bottom: 1px solid rgba(210,163,120,0.3); }
     .footer-brand { font-size: 20px; font-weight: 800; color: var(--on-dark); letter-spacing: 1px; margin-bottom: 6px; }
     .footer-tagline { font-size: 13px; color: var(--on-muted); }
     .footer-links { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
@@ -96,11 +104,7 @@
       .nav-menu a { display: block; padding: 13px 20px; font-size: 15px; }
       .nav-cta { margin: 8px 20px 4px; }
       .nav-toggle { display: flex; }
-      .contact-grid { grid-template-columns: 1fr; }
       .footer-grid { flex-direction: column; gap: 24px; }
-    }
-    @media (max-width: 640px) {
-      .sec { padding: 64px 0; }
     }
   </style>
 </head>
@@ -122,70 +126,71 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </ul>
 </header>
 
-<section class="hero">
-  <div class="ctn hero-inner">
-    <p class="hero-label">CONTACT</p>
-    <h1 class="hero-hl">문의 및<br>수강신청</h1>
-    <p class="hero-sub">시공 견적부터 교육 신청까지<br>아트푼타가 직접 확인합니다</p>
-  </div>
-</section>
-
-<section class="sec">
+<div class="page-header">
   <div class="ctn">
-    <p class="eyebrow">문의 방법</p>
-    <h2 class="h2">아래 방법으로<br>연락주세요</h2>
-    <div class="contact-grid">
-      <div class="contact-methods">
-        <div class="contact-card">
-          <p class="contact-card-label">시공 견적문의</p>
-          <h3 class="contact-card-title">네이버 플레이스 톡톡</h3>
-          <p class="contact-card-desc">현장 작업 중에는 전화를 받지 못하는 경우가 많습니다. 네이버 플레이스 톡톡으로 문의 주시면 최대한 빠르게 연락드립니다.</p>
-          <div class="contact-card-action">
-            <a href="https://talk.naver.com/w5x1nv?frm=pblog&ref=https%3A%2F%2Fblog.naver.com%2Fwook5461%2F223384512385#nafullscreen" target="_blank" rel="noreferrer" class="btn btn-flame">톡톡으로 문의하기 →</a>
-          </div>
-        </div>
-        <div class="contact-card">
-          <p class="contact-card-label">교육 수강신청</p>
-          <h3 class="contact-card-title">네이버 폼 신청</h3>
-          <p class="contact-card-desc">유럽미장 실전 교육 수강을 원하시면 아래 신청 폼을 작성해 주세요. 신청 후 2~3일 내 개별 유선 연락드립니다.</p>
-          <div class="contact-card-action">
-            <a href="https://form.naver.com/response/oeenoqRMMcj-AWypCbu50A" target="_blank" rel="noreferrer" class="btn btn-ocean">수강신청하기 →</a>
-          </div>
-        </div>
-        <div class="notice-box">
-          <p><strong>안내사항</strong></p>
-          <p>현장 작업 중에는 전화 응대가 어렵습니다. 톡톡 또는 신청 폼을 이용해 주시면 빠르게 확인 후 연락드립니다.</p>
-          <p>견적 문의 시 시공 위치, 면적, 원하시는 마감 종류를 함께 알려주시면 더 정확한 안내가 가능합니다.</p>
-        </div>
-      </div>
-      <div>
-        <div class="info-card">
-          <h3 class="info-card-title">아트푼타 정보</h3>
-          <div class="info-list">
-            <div class="info-row">
-              <span class="info-key">지역</span>
-              <span class="info-val">부산·경남 전 지역</span>
-            </div>
-            <div class="info-row">
-              <span class="info-key">분야</span>
-              <span class="info-val">유럽미장 · 특수페인트 · 방수 · 외벽스타코 · 도장</span>
-            </div>
-            <div class="info-row">
-              <span class="info-key">경력</span>
-              <span class="info-val">12년 현장 경력 / 시공 후 1년 하자 무상 A/S</span>
-            </div>
-            <div class="info-row">
-              <span class="info-key">교육</span>
-              <span class="info-val">유럽미장 실전 수익화 과정 (기존 시공기술자 대상)</span>
-            </div>
-            <div class="info-row">
-              <span class="info-key">SNS</span>
-              <span class="info-val">#art_punta_paint</span>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="page-header-inner">
+      <h1>문의하기</h1>
     </div>
+  </div>
+</div>
+
+<section class="form-sec">
+  <div class="ctn">
+    <p class="form-eyebrow">CONTACT US</p>
+    <h2 class="form-heading">아트푼타 문의하기</h2>
+    <p class="form-sub">궁금하신 점은 무엇이든 알려드립니다.</p>
+
+    <div id="formAlert" class="form-alert" role="alert"></div>
+
+    <form class="contact-form" id="contactForm" novalidate>
+      <!-- 개인정보 동의 -->
+      <div class="field">
+        <label class="field-label">개인정보 수집 및 이용 동의 <span class="req">●</span></label>
+        <div class="privacy-box">
+          <h4>제1조 (개인정보의 처리목적)</h4>
+          <p>아트푼타는 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 개인정보보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.</p>
+          <p>1. 시공 견적 및 상담 문의 접수·처리<br>2. 교육 수강신청 접수 및 안내<br>3. 문의에 대한 회신 및 고객 응대</p>
+          <h4 style="margin-top:10px">제2조 (수집하는 개인정보 항목)</h4>
+          <p>이름, 연락처(휴대전화번호), 문의 내용</p>
+          <h4 style="margin-top:10px">제3조 (개인정보의 보유 및 이용기간)</h4>
+          <p>수집된 개인정보는 문의 처리 완료 후 6개월 이내 파기합니다. 단, 관계 법령에 따라 보존이 필요한 경우 해당 기간 동안 보관합니다.</p>
+          <h4 style="margin-top:10px">제4조 (동의 거부 권리 및 불이익)</h4>
+          <p>개인정보 수집·이용에 동의를 거부하실 수 있으며, 거부 시 문의 접수가 제한될 수 있습니다.</p>
+        </div>
+        <div class="checkbox-row">
+          <input type="checkbox" id="privacyAgree" name="privacyAgree" />
+          <label for="privacyAgree">개인정보 수집 및 이용에 동의합니다.</label>
+        </div>
+      </div>
+
+      <!-- 이름 -->
+      <div class="field">
+        <label class="field-label" for="userName">이름 <span class="req">●</span></label>
+        <input class="input" type="text" id="userName" name="name" placeholder="홍길동" autocomplete="name" />
+      </div>
+
+      <!-- 연락처 -->
+      <div class="field">
+        <label class="field-label">연락처 <span class="req">●</span></label>
+        <div class="phone-row">
+          <input class="input" type="tel" id="phone1" name="phone1" placeholder="010" maxlength="3" inputmode="numeric" style="max-width:100px" />
+          <span class="phone-sep">-</span>
+          <input class="input" type="tel" id="phone2" name="phone2" placeholder="0000" maxlength="4" inputmode="numeric" />
+          <span class="phone-sep">-</span>
+          <input class="input" type="tel" id="phone3" name="phone3" placeholder="0000" maxlength="4" inputmode="numeric" />
+        </div>
+      </div>
+
+      <!-- 내용 -->
+      <div class="field">
+        <label class="field-label" for="message">내용 <span class="req">●</span></label>
+        <textarea class="input" id="message" name="message" placeholder="궁금하신 점을 자유롭게 입력해 주세요."></textarea>
+      </div>
+
+      <div class="submit-wrap">
+        <button type="submit" class="btn-submit">문의하기</button>
+      </div>
+    </form>
   </div>
 </section>
 
@@ -221,6 +226,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       menu.classList.remove('open');
       toggle.textContent = '☰';
       toggle.setAttribute('aria-expanded', false);
+    }
+  });
+
+  /* Phone auto-advance */
+  document.getElementById('phone1').addEventListener('input', function() {
+    if (this.value.length >= 3) document.getElementById('phone2').focus();
+  });
+  document.getElementById('phone2').addEventListener('input', function() {
+    if (this.value.length >= 4) document.getElementById('phone3').focus();
+  });
+
+  /* Form validation */
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const alert = document.getElementById('formAlert');
+    alert.className = 'form-alert';
+    alert.textContent = '';
+
+    const agree = document.getElementById('privacyAgree').checked;
+    const name = document.getElementById('userName').value.trim();
+    const p1 = document.getElementById('phone1').value.trim();
+    const p2 = document.getElementById('phone2').value.trim();
+    const p3 = document.getElementById('phone3').value.trim();
+    const msg = document.getElementById('message').value.trim();
+
+    if (!agree) { showError('개인정보 수집 및 이용에 동의해 주세요.'); return; }
+    if (!name) { showError('이름을 입력해 주세요.'); return; }
+    if (!p1 || !p2 || !p3) { showError('연락처를 입력해 주세요.'); return; }
+    if (!msg) { showError('문의 내용을 입력해 주세요.'); return; }
+
+    /* TODO: 실제 제출 처리 (FormSubmit, 네이버 폼 등으로 연결) */
+    alert.className = 'form-alert success';
+    alert.textContent = '문의가 접수되었습니다. 빠른 시간 내에 연락드리겠습니다.';
+    this.reset();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    function showError(msg) {
+      alert.className = 'form-alert error';
+      alert.textContent = msg;
+      alert.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   });
 </script>
