@@ -9,7 +9,8 @@
       "PowerShell($env:PATH += \";C:\\\\Program Files\\\\GitHub CLI\"; gh auth status 2>&1)",
       "PowerShell(cmdkey /list)",
       "PowerShell(Start-Process \"C:\\\\Users\\\\JY\\\\AppData\\\\Local\\\\GitHubDesktop\\\\GitHubDesktop.exe\")",
-      "PowerShell(Get-Process | Where-Object { $_.Name -match \"GitHub\" } | Select-Object Name, MainWindowTitle)"
+      "PowerShell(Get-Process | Where-Object { $_.Name -match \"GitHub\" } | Select-Object Name, MainWindowTitle)",
+      "Bash(git pull *)"
     ]
   }
 }

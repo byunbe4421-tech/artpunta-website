@@ -433,9 +433,28 @@
     .recruitment-cta {
       margin-top: 24px;
     }
+    .discount-notice {
+      margin-top: 20px;
+      padding: 20px 24px;
+      background: var(--soft);
+      border: 1px solid var(--hair);
+      border-radius: var(--r);
+      text-align: center;
+    }
+    .discount-note {
+      font-size: 13.5px; color: var(--flame); line-height: 1.7; margin-bottom: 10px;
+    }
+    .discount-list {
+      list-style: disc; display: inline-flex; flex-direction: column; gap: 6px; padding-left: 20px; text-align: left;
+    }
+    .discount-list li {
+      font-size: 14px;
+    }
+    .discount-list li s { color: var(--flame); }
+    .discount-list li strong { color: var(--ink); font-weight: 700; }
     .enroll-cta {
       background: var(--card); border: 1px solid var(--hair); border-radius: var(--r);
-      padding: 48px; text-align: center; margin-top: 48px;
+      padding: 48px; text-align: center; margin-top: 20px;
     }
     .enroll-cta-sub {
       font-size: 16px; line-height: 1.8; color: var(--body-c); margin-bottom: 24px;
@@ -490,39 +509,39 @@
       }
       .footer-grid { flex-direction: column; gap: 24px; }
     }
+    /* Mobile hero feature bar – hidden on desktop */
+    .hero-feat-mob { display: none; }
+    .hero-feat-item { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 3px; }
+    .hero-feat-sep { width: 1px; background: var(--hair); }
+    .hfi-icon { font-size: 22px; margin-bottom: 4px; }
+    .hfi-title { font-size: 12px; font-weight: 800; color: var(--gold); font-family: "Pretendard", system-ui, sans-serif; }
+    .hfi-desc { font-size: 11px; color: var(--muted); line-height: 1.4; word-break: keep-all; }
+
     @media (max-width: 640px) {
       .sec { padding: 64px 0; }
       .hero {
-        min-height: auto;
+        min-height: unset;
         display: block;
-        align-items: initial;
         padding-top: 60px;
         background: transparent;
+        overflow: hidden;
       }
+      .hero::before, .hero::after { display: none; }
       .hero-mobile-art {
         display: block;
         width: 100%;
         height: auto;
+        object-fit: cover;
       }
-      .hero-inner {
-        display: none;
+      .hero .hero-inner { display: none; }
+      .hero-feat-mob {
+        display: flex;
+        align-items: stretch;
+        background: var(--canvas);
+        border-bottom: 1px solid var(--hair);
       }
-      .hero-label,
-      .hero-hl,
-      .hero-sub { display: none; }
-      .hero-actions { display: none; }
-      .hero .btn {
-        flex: 1 1 0;
-        justify-content: center;
-        height: 46px;
-        padding: 0 12px;
-        font-size: 14px;
-        white-space: nowrap;
-      }
-      .hero .btn-ghost-dark {
-        border-color: var(--hair);
-        color: var(--ink);
-      }
+      .hero-feat-mob .hero-feat-item { flex: 1; padding: 16px 6px; }
+      .hero-feat-mob .hero-feat-sep { align-self: stretch; margin: 12px 0; }
       .compare-wrap {
         overflow-x: visible;
         border: 0;
@@ -631,11 +650,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- HERO -->
 <section class="hero">
-  <img class="hero-mobile-art" src="edu-hero.webp" alt="유럽미장 수익화 3일 압축 과정 기존 시공기술자 대상">
+  <img class="hero-mobile-art" src="edu-hero2.webp.webp" alt="아트푼타 유럽미장 실전 교육">
   <div class="ctn hero-inner">
     <p class="hero-label">#art_punta / class</p>
     <h1 class="hero-hl">유럽미장을 배우는 것과<br>돈을 버는 것은 다릅니다</h1>
-    <p class="hero-sub">아트푼타 유럽미장 실전 1기</p>
+    <p class="hero-sub">아트푼타 유럽미장 실전 <strong>2기 (하는법, 파는법)</strong></p>
   </div>
 </section>
 
@@ -746,7 +765,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <p class="proof-lead">창업, 부업, 취업, 시공업 진입<br>직접 영업을 시작한다면 모두 가능합니다</p>
           <p class="proof-end">"수업 후 첫 시공 계약까지<br>연결된 분들이 있습니다"</p>
           <p class="proof-lead">기술을 배웠다면<br>이제 고객에게 발견되어야 합니다</p>
-          <p class="proof-end">시공업 블로그 마케팅 전문 업체를<br>1기 수강생만을 위해 특별 섭외했습니다</p>
+          <p class="proof-end">시공업 블로그 마케팅 전문 업체를<br>특별 섭외했습니다</p>
           <ul class="proof-list">
             <li>단시간에 방문자 늘리는 글 작성 노하우</li>
             <li>지역 키워드로 고객 잡는 법</li>
@@ -850,7 +869,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <ul>
             <li>첫 유럽미장 시공, 어떻게 일을 따왔나</li>
             <li>단가를 어떻게 설계하고 사업으로 키웠는지</li>
-            <li>네이버 브랜드 블로그 A-Z (1기 한정 무료)</li>
+            <li>네이버 브랜드 블로그 A-Z (2기 한정 무료)</li>
             <li>지역 키워드로 고객 잡는 법</li>
             <li>문의가 들어오는 포스팅 구조</li>
           </ul>
@@ -893,7 +912,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="eyebrow">모집요강</p>
     <h2 class="h2">2기 한정 특별 모집요강</h2>
     <div class="recruitment-card">
-      <img src="edu-curriculum2.webp" alt="아트푼타 유럽미장 실전 1기 모집요강">
+      <img src="edu-curriculum2.webp" alt="아트푼타 유럽미장 실전 2기 모집요강">
+    </div>
+    <div class="discount-notice">
+      <p class="discount-note">* 할인 혜택은 26년 한정으로 진행되며<br>기수 별 할인 금액은 줄어들 예정입니다.</p>
+      <ul class="discount-list">
+        <li><s>1기 88만원 (모집 마감)</s></li>
+        <li><strong>2기 99만원</strong></li>
+      </ul>
     </div>
     <div class="enroll-cta">
       <p class="enroll-cta-sub">신청 후 2~3일 내 개별 유선 연락드리겠습니다</p>
